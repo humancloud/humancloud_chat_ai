@@ -1579,8 +1579,10 @@ QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY", None)
 
 # OpenSearch
 OPENSEARCH_URI = os.environ.get("OPENSEARCH_URI", "https://localhost:9200")
-OPENSEARCH_SSL = os.environ.get("OPENSEARCH_SSL", True)
-OPENSEARCH_CERT_VERIFY = os.environ.get("OPENSEARCH_CERT_VERIFY", False)
+OPENSEARCH_SSL = os.environ.get("OPENSEARCH_SSL", "true").lower() == "true"
+OPENSEARCH_CERT_VERIFY = (
+    os.environ.get("OPENSEARCH_CERT_VERIFY", "false").lower() == "true"
+)
 OPENSEARCH_USERNAME = os.environ.get("OPENSEARCH_USERNAME", None)
 OPENSEARCH_PASSWORD = os.environ.get("OPENSEARCH_PASSWORD", None)
 
@@ -1652,6 +1654,12 @@ TIKA_SERVER_URL = PersistentConfig(
     "TIKA_SERVER_URL",
     "rag.tika_server_url",
     os.getenv("TIKA_SERVER_URL", "http://tika:9998"),  # Default for sidecar deployment
+)
+
+DOCLING_SERVER_URL = PersistentConfig(
+    "DOCLING_SERVER_URL",
+    "rag.docling_server_url",
+    os.getenv("DOCLING_SERVER_URL", "http://docling:5001"),
 )
 
 DOCUMENT_INTELLIGENCE_ENDPOINT = PersistentConfig(
