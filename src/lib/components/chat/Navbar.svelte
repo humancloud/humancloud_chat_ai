@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { toast } from 'svelte-sonner';
-	import { PUBLIC_REGION } from '$env/static/public';
 	import {
 		WEBUI_NAME,
 		chatId,
@@ -37,8 +36,8 @@
 	export let chat;
 	export let selectedModels;
 	export let showModelSelector = true;
-	let country: string = PUBLIC_REGION;
-	const countries = regionsOptions
+	let country: string = 'india';
+	const countries = regionsOptions;
 
 	const handleCountryChange = (event) => {
 		const selectedCountry = countries.find((c) => c.value === event.target.value);
